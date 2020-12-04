@@ -1,0 +1,35 @@
+{
+    "expo": {
+        "name": "Percentual",
+        "slug": "percentual",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icone.png",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#000000"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.gabrielramos.percentual",
+            "buildNumber": "1.0.0"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/android-icon.png",
+                "backgroundColor": "#000"
+            },
+            "package": "com.gabrielramos.percentual",
+            "versionCode": 1
+        },
+        "description": "App para cálculo de porcentagem",
+        "githubUrl": "https://github.com/gaoliver/percentual-app.git"
+    }
+}
