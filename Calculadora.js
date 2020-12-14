@@ -10,10 +10,6 @@ import {
 } from "react-native";
 
 export default class Calculadora extends Component {
-
-
-
-
   // Back-end
 
   state = {
@@ -24,8 +20,7 @@ export default class Calculadora extends Component {
     contador: 0,
   };
 
-
-//   Função calcular
+  //   Função calcular
   calc() {
     if (this.state.valor == undefined) {
       var z = (this.state.perc * this.state.num) / 100;
@@ -39,15 +34,56 @@ export default class Calculadora extends Component {
       });
     } else if (this.state.perc == undefined) {
       var x = (100 * this.state.valor) / this.state.num;
-
       this.setState({
         perc: x,
       });
+    } else {
+      Alert.alert(
+        "Qual valor deseja descobrir?",
+        "X: a porcentagem \
+        \nY: o número \
+        \nZ: o valor final \
+        \n\nToque num botão abaixo:",
+        [
+          {
+            text: "x",
+            onPress: () => this.calcX()
+          },
+          {
+            text: "y",
+            onPress: () => this.calcY()
+          },
+          {
+            text: "z",
+            onPress: () => this.calcZ()
+          },
+        ]
+      );
     }
   }
 
+  calcX() {
+    var x = (100 * this.state.valor) / this.state.num;
+    this.setState({
+      perc: x,
+    });
+  }
 
-//   Função zerar
+  calcY() {
+    var y = (100 * this.state.valor) / this.state.perc;
+    this.setState({
+      num: y,
+    });
+  }
+
+  calcZ() {
+    var z = (this.state.perc * this.state.num) / 100;
+    this.setState({
+      valor: z,
+    });
+  }
+
+  //   Função zerar
   zerar() {
     this.setState({
       perc: undefined,
@@ -58,16 +94,10 @@ export default class Calculadora extends Component {
 
   // Fim do back-end
 
-
-
-
-
   render() {
     return (
       <>
         <View style={styles.Caixa}>
-
-
           {/* Primeira Linha - Porcentagem - X */}
           <View style={styles.Row}>
             {/* Input */}
@@ -86,11 +116,8 @@ export default class Calculadora extends Component {
             <Text style={styles.Text}>%</Text>
           </View>
 
-
-
           {/* Segunda Linha - Valor de referência - Y */}
           <View style={styles.Row}>
-            
             <Text style={styles.Text}>de </Text>
             <TextInput
               placeholder={"y"}
@@ -104,8 +131,6 @@ export default class Calculadora extends Component {
               <Text>{this.state.num}</Text>
             </TextInput>
           </View>
-
-
 
           {/* Terceira Linha - resultado - Z */}
           <View style={styles.Row}>
@@ -123,15 +148,10 @@ export default class Calculadora extends Component {
             </TextInput>
           </View>
 
-
-
           {/* <Text>
           X: {this.state.perc}, Y: {this.state.num}, Z: {this.state.valor}
         </Text> */}
-        
         </View>
-
-
 
         {/* Botões principais */}
         <View style={styles.Row}>
@@ -149,17 +169,16 @@ export default class Calculadora extends Component {
           </TouchableOpacity>
         </View>
 
-
-
         {/* Botao de Ajuda */}
-        <View style={{ position: 'absolute', top: 750  }}>
+        <View style={{ position: "absolute", top: 750 }}>
           <TouchableOpacity
             style={styles.btnHelp}
             onPress={() =>
               Alert.alert(
                 "Como usar?",
-                "Altere os valores dos campos desejados e deixe zerado apenas o que deseja calcular. Depois, toque o botão CALCULAR para ver o resultado."
-                 + "\n" + "\nPara realizar a operação novamente, toque o botão ZERAR."
+                "Altere os valores dos campos desejados e deixe zerado apenas o que deseja calcular. Depois, toque o botão CALCULAR para ver o resultado." +
+                  "\n" +
+                  "\nPara realizar a operação novamente, toque o botão ZERAR."
               )
             }
           >
@@ -203,9 +222,9 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     backgroundColor: "#248ef2",
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "center",
-    borderRadius: 100
+    borderRadius: 100,
   },
   btnText: {
     fontSize: 18,
@@ -216,7 +235,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: "#444",
     justifyContent: "center",
-    borderRadius: 20
+    borderRadius: 20,
   },
   btnTextHelp: {
     fontSize: 20,
