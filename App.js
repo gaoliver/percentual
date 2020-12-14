@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
   StyleSheet,
@@ -6,10 +5,10 @@ import {
   TouchableWithoutFeedback,
   View,
   Keyboard,
-  ScrollView,
   SafeAreaView,
-  KeyboardAvoidingView,
+  StatusBar,
 } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Calculadora from "./Calculadora";
 
@@ -17,9 +16,13 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <SafeAreaView style={styles.container}>
-          <StatusBar style="auto" />
+          <StatusBar translucent={true} />
           {/* Titulo */}
-          <Text style={styles.Title}>% P e r c e n t u a l %</Text>
+          <View style={styles.Header}>
+          <MaterialCommunityIcons name="brightness-percent" size={46} color="white" />
+          <Text style={styles.Title}>P e r c e n t u a l</Text>
+          <MaterialCommunityIcons name="brightness-percent" size={46} color="white" />
+          </View>
           {/* Corpo do APP */}
           <Calculadora />
         </SafeAreaView>
@@ -33,6 +36,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     alignItems: "center",
     justifyContent: "center",
+  },
+  Header: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   Title: {
     color: "#FFF",

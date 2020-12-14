@@ -73,6 +73,7 @@ export default class Calculadora extends Component {
             {/* Input */}
             <TextInput
               placeholder={"x"}
+              keyboardType="number-pad"
               placeholderTextColor={this.state.plcHoldColor}
               style={styles.Input}
               onChangeText={(valor) => {
@@ -93,6 +94,7 @@ export default class Calculadora extends Component {
             <Text style={styles.Text}>de </Text>
             <TextInput
               placeholder={"y"}
+              keyboardType="number-pad"
               placeholderTextColor={this.state.plcHoldColor}
               style={styles.Input}
               onChangeText={(valor) => {
@@ -110,6 +112,7 @@ export default class Calculadora extends Component {
             <Text style={styles.Text}>= </Text>
             <TextInput
               placeholder={"z"}
+              keyboardType="number-pad"
               placeholderTextColor={this.state.plcHoldColor}
               style={styles.Input}
               onChangeText={(value) => {
