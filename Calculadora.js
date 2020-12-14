@@ -4,9 +4,10 @@ import {
   StyleSheet,
   View,
   TextInput,
-  Button,
   Alert,
   TouchableOpacity,
+  Modal,
+  Button,
 } from "react-native";
 
 export default class Calculadora extends Component {
@@ -18,6 +19,7 @@ export default class Calculadora extends Component {
     valor: undefined,
     plcHoldColor: "#cecece",
     contador: 0,
+    ModalVisible: false,
   };
 
   //   Função calcular
@@ -38,34 +40,26 @@ export default class Calculadora extends Component {
         perc: x,
       });
     } else {
-      Alert.alert(
-        "Qual valor deseja descobrir?",
-        "X: a porcentagem \
-        \nY: o número \
-        \nZ: o valor final \
-        \n\nToque num botão abaixo:",
-        [
-          {
-            text: "x",
-            onPress: () => this.calcX()
-          },
-          {
-            text: "y",
-            onPress: () => this.calcY()
-          },
-          {
-            text: "z",
-            onPress: () => this.calcZ()
-          },
-        ]
-      );
+      this.setState({
+        ModalVisible: true,
+      });
     }
+  }
+
+  close() {
+    this.setState({
+      ModalVisible: false,
+    });
   }
 
   calcX() {
     var x = (100 * this.state.valor) / this.state.num;
     this.setState({
       perc: x,
+    });
+
+    this.setState({
+      ModalVisible: false,
     });
   }
 
@@ -74,12 +68,20 @@ export default class Calculadora extends Component {
     this.setState({
       num: y,
     });
+
+    this.setState({
+      ModalVisible: false,
+    });
   }
 
   calcZ() {
     var z = (this.state.perc * this.state.num) / 100;
     this.setState({
       valor: z,
+    });
+
+    this.setState({
+      ModalVisible: false,
     });
   }
 
@@ -97,6 +99,42 @@ export default class Calculadora extends Component {
   render() {
     return (
       <>
+        {/* Modal para calcular novamente */}
+        <Modal
+          visible={this.state.ModalVisible}
+          animationType="slide"
+          transparent={true}
+        >
+          <View style={styles.ModalFundo}>
+            <View style={styles.Modal}>
+              <Text style={styles.ModalTitle}>
+                Qual valor deseja descobrir?
+              </Text>
+              <View style={styles.ModalButtons}>
+                <View style={styles.ModalButtonsIn}>
+                  <Button
+                    title="X:   a porcentagem"
+                    onPress={() => this.calcX()}
+                  ></Button>
+                  <Button
+                    title="Y:   o número"
+                    onPress={() => this.calcY()}
+                  ></Button>
+                  <Button
+                    title="Z:   o valor final"
+                    onPress={() => this.calcZ()}
+                  ></Button>
+                </View>
+                <Button
+                  title="Cancelar"
+                  color="grey"
+                  onPress={() => this.close()}
+                ></Button>
+              </View>
+            </View>
+          </View>
+        </Modal>
+
         <View style={styles.Caixa}>
           {/* Primeira Linha - Porcentagem - X */}
           <View style={styles.Row}>
@@ -241,4 +279,32 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fffff9",
   },
+  ModalFundo: {
+    backgroundColor: "#000a",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  Modal: {
+    width: "80%",
+    padding: 20,
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+  ModalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 30,
+  },
+  ModalButtons: {
+    width: "90%",
+    height: 195,
+    justifyContent: "space-between",
+  },
+  ModalButtonsIn: {
+    width: '100%',
+    height: 130,
+    justifyContent: 'space-between'
+  }
 });
