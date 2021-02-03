@@ -5,8 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import Calculadora from "./Calculadora";
-import Crescimento from "./Crescimento";
+import Calculadora from "./Screens/Calculadora";
+import Crescimento from "./Screens/Crescimento";
 
 const Stack = createStackNavigator();
 
