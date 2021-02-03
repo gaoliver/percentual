@@ -101,13 +101,13 @@ const Crescimento = ({ navigation }) => {
 
       <View style={styles.Caixa}>
         {/* Primeira Linha - Valor Anterior - X */}
-        <View style={{...styles.Col, alignItems: 'center'}}>
+        <View style={{ ...styles.Col, alignItems: "center" }}>
           {/* Input */}
           <Text style={{ ...styles.Text, fontSize: 15, fontWeight: "bold" }}>
             Valor Anterior
           </Text>
           <TextInput
-            placeholder={"Anterior"}
+            placeholder={"0.00"}
             keyboardType="number-pad"
             placeholderTextColor={plcHoldColor}
             style={styles.InputCresc}
@@ -126,7 +126,7 @@ const Crescimento = ({ navigation }) => {
             Valor Posterior
           </Text>
           <TextInput
-            placeholder={"Posterior"}
+            placeholder={"0.00"}
             keyboardType="number-pad"
             placeholderTextColor={plcHoldColor}
             style={styles.InputCresc}
@@ -140,12 +140,15 @@ const Crescimento = ({ navigation }) => {
         </View>
 
         {/* Terceira Linha - Porcentagem de Crescimento - Z */}
-        <View style={{...styles.Row, marginTop: 20}}>
+        <View style={{ ...styles.Col, alignItems: "center" }}>
+          <Text style={{ ...styles.Text, fontSize: 15, fontWeight: "bold" }}>
+            Crescimento
+          </Text>
           <TextInput
-            placeholder={"Crescimento"}
+            placeholder={"0%"}
             keyboardType="number-pad"
             placeholderTextColor={plcHoldColor}
-            style={{ ...styles.Input, fontSize: 15, width: 110 }}
+            style={styles.Input}
             onChangeText={(value) => {
               setvalor(Number(value));
               setcontador(+1);
@@ -153,7 +156,6 @@ const Crescimento = ({ navigation }) => {
           >
             <Text>{valor}</Text>
           </TextInput>
-          <Text style={styles.Text}>%</Text>
         </View>
       </View>
 

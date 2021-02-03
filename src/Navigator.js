@@ -27,7 +27,8 @@ const TabNavigator = () => {
           keyboardHidesTabBar: true,
           labelStyle: {
             fontSize: 14,
-            paddingBottom: 5
+            paddingBottom: 5,
+            fontWeight: 'bold'
           },
           iconStyle: {
             marginTop: 15
