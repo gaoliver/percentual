@@ -27,17 +27,17 @@ export default class Calculadora extends Component {
     if (this.state.valor == undefined) {
       var z = (this.state.perc * this.state.num) / 100;
       this.setState({
-        valor: z,
+        valor: z.toFixed(2),
       });
     } else if (this.state.num == undefined) {
       var y = (100 * this.state.valor) / this.state.perc;
       this.setState({
-        num: y,
+        num: y.toFixed(2),
       });
     } else if (this.state.perc == undefined) {
       var x = (100 * this.state.valor) / this.state.num;
       this.setState({
-        perc: x,
+        perc: x.toFixed(2),
       });
     } else {
       this.setState({
@@ -55,7 +55,7 @@ export default class Calculadora extends Component {
   calcX() {
     var x = (100 * this.state.valor) / this.state.num;
     this.setState({
-      perc: x,
+      perc: x.toFixed(2),
     });
 
     this.setState({
@@ -66,7 +66,7 @@ export default class Calculadora extends Component {
   calcY() {
     var y = (100 * this.state.valor) / this.state.perc;
     this.setState({
-      num: y,
+      num: y.toFixed(2),
     });
 
     this.setState({
@@ -77,7 +77,7 @@ export default class Calculadora extends Component {
   calcZ() {
     var z = (this.state.perc * this.state.num) / 100;
     this.setState({
-      valor: z,
+      valor: z.toFixed(2),
     });
 
     this.setState({
@@ -145,7 +145,7 @@ export default class Calculadora extends Component {
               placeholderTextColor={this.state.plcHoldColor}
               style={styles.Input}
               onChangeText={(valor) => {
-                this.setState({ perc: valor, contador: +1 });
+                this.setState({ perc: Number(valor), contador: +1 });
               }}
             >
               <Text>{this.state.perc}</Text>
@@ -163,7 +163,7 @@ export default class Calculadora extends Component {
               placeholderTextColor={this.state.plcHoldColor}
               style={styles.Input}
               onChangeText={(valor) => {
-                this.setState({ num: valor, contador: +1 });
+                this.setState({ num: Number(valor), contador: +1 });
               }}
             >
               <Text>{this.state.num}</Text>
@@ -178,17 +178,14 @@ export default class Calculadora extends Component {
               keyboardType="number-pad"
               placeholderTextColor={this.state.plcHoldColor}
               style={styles.Input}
-              onChangeText={(value) => {
-                this.setState({ valor: value, contador: +1 });
+              onChangeText={(valor) => {
+                this.setState({ valor: Number(valor), contador: +1 });
               }}
             >
               <Text>{this.state.valor}</Text>
             </TextInput>
           </View>
 
-          {/* <Text>
-          X: {this.state.perc}, Y: {this.state.num}, Z: {this.state.valor}
-        </Text> */}
         </View>
 
         {/* Botões principais */}
