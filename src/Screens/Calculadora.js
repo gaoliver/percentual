@@ -169,21 +169,6 @@ const Calculadora = ({ navigation }) => {
           <Text style={styles.btnText}>Zerar</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Botao de Ajuda */}
-      <View style={{ position: "absolute", top: 700 }}>
-        <TouchableOpacity
-          style={styles.btnHelp}
-          onPress={() =>
-            Alert.alert(
-              "Como usar?",
-              "Preencha os campos com valores, deixando em branco apenas o valor que deseja descobrir. Em seguida, toque em CALCULAR."
-            )
-          }
-        >
-          <Text style={styles.btnTextHelp}>Como usar?</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

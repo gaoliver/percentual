@@ -5,6 +5,7 @@ import {
   View,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Colors from '../Constants/Colors'
 
 const Header = () => {
   return (
@@ -33,11 +34,10 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-around",
     alignItems: "flex-end",
-    backgroundColor: '#000',
     paddingBottom: 30
   },
   Title: {
-    color: "#FFF",
+    color: Colors.light,
     fontSize: 40,
   },
 });
