@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -10,218 +10,184 @@ import {
   Button,
 } from "react-native";
 
-export default class Calculadora extends Component {
+const Calculadora = ({ navigation }) => {
   // Back-end
-
-  state = {
-    perc: undefined,
-    num: undefined,
-    valor: undefined,
-    plcHoldColor: "#cecece",
-    contador: 0,
-    ModalVisible: false,
-  };
+  const [perc, setperc] = useState(undefined);
+  const [num, setnum] = useState(undefined);
+  const [valor, setvalor] = useState(undefined);
+  const [plcHoldColor, setplcHoldColor] = useState("#cecece");
+  const [contador, setcontador] = useState(0);
+  const [ModalVisible, setModalVisible] = useState(false);
 
   //   Função calcular
-  calc() {
-    if (this.state.valor == undefined) {
-      var z = (this.state.perc * this.state.num) / 100;
-      this.setState({
-        valor: z.toFixed(2),
-      });
-    } else if (this.state.num == undefined) {
-      var y = (100 * this.state.valor) / this.state.perc;
-      this.setState({
-        num: y.toFixed(2),
-      });
-    } else if (this.state.perc == undefined) {
-      var x = (100 * this.state.valor) / this.state.num;
-      this.setState({
-        perc: x.toFixed(2),
-      });
+  const calc = () => {
+    if (valor == undefined) {
+      var z = (perc * num) / 100;
+      setvalor(z.toFixed(2));
+    } else if (num == undefined) {
+      var y = (100 * valor) / perc;
+      setnum(y.toFixed(2))
+    } else if (perc == undefined) {
+      var x = (100 * valor) / num;
+      setperc(x.toFixed(2))
     } else {
-      this.setState({
-        ModalVisible: true,
-      });
+      setModalVisible(true)
     }
+  };
+
+  function close() {
+    setModalVisible(false)
   }
 
-  close() {
-    this.setState({
-      ModalVisible: false,
-    });
+  function calcX() {
+    var x = (100 * valor) / num;
+    setperc(x.toFixed(2))
+    setModalVisible(false)
   }
 
-  calcX() {
-    var x = (100 * this.state.valor) / this.state.num;
-    this.setState({
-      perc: x.toFixed(2),
-    });
-
-    this.setState({
-      ModalVisible: false,
-    });
+  function calcY() {
+    var y = (100 * valor) / perc;
+    setnum(y.toFixed(2))
+    setModalVisible(false)
   }
 
-  calcY() {
-    var y = (100 * this.state.valor) / this.state.perc;
-    this.setState({
-      num: y.toFixed(2),
-    });
-
-    this.setState({
-      ModalVisible: false,
-    });
-  }
-
-  calcZ() {
-    var z = (this.state.perc * this.state.num) / 100;
-    this.setState({
-      valor: z.toFixed(2),
-    });
-
-    this.setState({
-      ModalVisible: false,
-    });
+  function calcZ() {
+    var z = (perc * num) / 100;
+    setvalor(z.toFixed(2))
+    setModalVisible(false)
   }
 
   //   Função zerar
-  zerar() {
-    this.setState({
-      perc: undefined,
-      num: undefined,
-      valor: undefined,
-    });
+  function zerar() {
+    setperc(undefined);
+    setnum(undefined);
+    setvalor(undefined);
   }
 
   // Fim do back-end
 
-  render() {
-    return (
-      <>
-        {/* Modal para calcular novamente */}
-        <Modal
-          visible={this.state.ModalVisible}
-          animationType="slide"
-          transparent={true}
-        >
-          <View style={styles.ModalFundo}>
-            <View style={styles.Modal}>
-              <Text style={styles.ModalTitle}>
-                Qual valor deseja descobrir?
-              </Text>
-              <View style={styles.ModalButtons}>
-                <View style={styles.ModalButtonsIn}>
-                  <Button
-                    title="X:   a porcentagem"
-                    onPress={() => this.calcX()}
-                  ></Button>
-                  <Button
-                    title="Y:   o número"
-                    onPress={() => this.calcY()}
-                  ></Button>
-                  <Button
-                    title="Z:   o valor final"
-                    onPress={() => this.calcZ()}
-                  ></Button>
-                </View>
+  return (
+    <>
+      {/* Modal para calcular novamente */}
+      <Modal visible={ModalVisible} animationType="slide" transparent={true}>
+        <View style={styles.ModalFundo}>
+          <View style={styles.Modal}>
+            <Text style={styles.ModalTitle}>Qual valor deseja descobrir?</Text>
+            <View style={styles.ModalButtons}>
+              <View style={styles.ModalButtonsIn}>
                 <Button
-                  title="Cancelar"
-                  color="grey"
-                  onPress={() => this.close()}
+                  title="X:   a porcentagem"
+                  onPress={() => calcX()}
+                ></Button>
+                <Button
+                  title="Y:   o número"
+                  onPress={() => calcY()}
+                ></Button>
+                <Button
+                  title="Z:   o valor final"
+                  onPress={() => calcZ()}
                 ></Button>
               </View>
+              <Button
+                title="Cancelar"
+                color="grey"
+                onPress={() => close()}
+              ></Button>
             </View>
           </View>
-        </Modal>
-
-        <View style={styles.Caixa}>
-          {/* Primeira Linha - Porcentagem - X */}
-          <View style={styles.Row}>
-            {/* Input */}
-            <TextInput
-              placeholder={"x"}
-              keyboardType="number-pad"
-              placeholderTextColor={this.state.plcHoldColor}
-              style={styles.Input}
-              onChangeText={(valor) => {
-                this.setState({ perc: Number(valor), contador: +1 });
-              }}
-            >
-              <Text>{this.state.perc}</Text>
-            </TextInput>
-            {/* Símbolo */}
-            <Text style={styles.Text}>%</Text>
-          </View>
-
-          {/* Segunda Linha - Valor de referência - Y */}
-          <View style={styles.Row}>
-            <Text style={styles.Text}>de </Text>
-            <TextInput
-              placeholder={"y"}
-              keyboardType="number-pad"
-              placeholderTextColor={this.state.plcHoldColor}
-              style={styles.Input}
-              onChangeText={(valor) => {
-                this.setState({ num: Number(valor), contador: +1 });
-              }}
-            >
-              <Text>{this.state.num}</Text>
-            </TextInput>
-          </View>
-
-          {/* Terceira Linha - resultado - Z */}
-          <View style={styles.Row}>
-            <Text style={styles.Text}>= </Text>
-            <TextInput
-              placeholder={"z"}
-              keyboardType="number-pad"
-              placeholderTextColor={this.state.plcHoldColor}
-              style={styles.Input}
-              onChangeText={(valor) => {
-                this.setState({ valor: Number(valor), contador: +1 });
-              }}
-            >
-              <Text>{this.state.valor}</Text>
-            </TextInput>
-          </View>
-
         </View>
+      </Modal>
 
-        {/* Botões principais */}
+      <View style={styles.Caixa}>
+        {/* Primeira Linha - Porcentagem - X */}
         <View style={styles.Row}>
-          {/* Botão calcular */}
-          <TouchableOpacity style={styles.Button} onPress={() => this.calc()}>
-            <Text style={styles.btnText}>Calcular</Text>
-          </TouchableOpacity>
-
-          {/* Espaçamento */}
-          <View style={{ width: 20 }}></View>
-
-          {/* Botão Zerar */}
-          <TouchableOpacity style={styles.Button} onPress={() => this.zerar()}>
-            <Text style={styles.btnText}>Zerar</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Botao de Ajuda */}
-        <View style={{ position: "absolute", top: 750 }}>
-          <TouchableOpacity
-            style={styles.btnHelp}
-            onPress={() =>
-              Alert.alert(
-                "Como usar?",
-                "Preencha os campos com valores, deixando em branco apenas o valor que deseja descobrir. Em seguida, toque em CALCULAR."
-              )
-            }
+          {/* Input */}
+          <TextInput
+            placeholder={"x"}
+            keyboardType="number-pad"
+            placeholderTextColor={plcHoldColor}
+            style={styles.Input}
+            onChangeText={(value) => {
+              setperc(Number(value));
+              setcontador(+1);
+            }}
           >
-            <Text style={styles.btnTextHelp}>Como usar?</Text>
-          </TouchableOpacity>
+            <Text>{perc}</Text>
+          </TextInput>
+          {/* Símbolo */}
+          <Text style={styles.Text}>%</Text>
         </View>
-      </>
-    );
-  }
-}
+
+        {/* Segunda Linha - Valor de referência - Y */}
+        <View style={styles.Row}>
+          <Text style={styles.Text}>de </Text>
+          <TextInput
+            placeholder={"y"}
+            keyboardType="number-pad"
+            placeholderTextColor={plcHoldColor}
+            style={styles.Input}
+            onChangeText={(value) => {
+              setnum(Number(value));
+              setcontador(+1);
+            }}
+          >
+            <Text>{num}</Text>
+          </TextInput>
+        </View>
+
+        {/* Terceira Linha - resultado - Z */}
+        <View style={styles.Row}>
+          <Text style={styles.Text}>= </Text>
+          <TextInput
+            placeholder={"z"}
+            keyboardType="number-pad"
+            placeholderTextColor={plcHoldColor}
+            style={styles.Input}
+            onChangeText={(value) => {
+              setvalor(Number(value));
+              setcontador(+1);
+            }}
+          >
+            <Text>{valor}</Text>
+          </TextInput>
+        </View>
+      </View>
+
+      {/* Botões principais */}
+      <View style={styles.Row}>
+        {/* Botão calcular */}
+        <TouchableOpacity style={styles.Button} onPress={() => calc()}>
+          <Text style={styles.btnText}>Calcular</Text>
+        </TouchableOpacity>
+
+        {/* Espaçamento */}
+        <View style={{ width: 20 }}></View>
+
+        {/* Botão Zerar */}
+        <TouchableOpacity style={styles.Button} onPress={() => zerar()}>
+          <Text style={styles.btnText}>Zerar</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Botao de Ajuda */}
+      <View style={{ position: "absolute", top: 700 }}>
+        <TouchableOpacity
+          style={styles.btnHelp}
+          onPress={() =>
+            Alert.alert(
+              "Como usar?",
+              "Preencha os campos com valores, deixando em branco apenas o valor que deseja descobrir. Em seguida, toque em CALCULAR."
+            )
+          }
+        >
+          <Text style={styles.btnTextHelp}>Como usar?</Text>
+        </TouchableOpacity>
+      </View>
+    </>
+  );
+};
+
+export default Calculadora;
 
 const styles = StyleSheet.create({
   Caixa: {
@@ -298,8 +264,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   ModalButtonsIn: {
-    width: '100%',
+    width: "100%",
     height: 130,
-    justifyContent: 'space-between'
-  }
-});
+    justifyContent: "space-between",
+  },
+})

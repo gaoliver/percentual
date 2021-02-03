@@ -11,13 +11,14 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Calculadora from "./Calculadora";
+import Navigator from "./Navigator";
 
 export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={styles.container}>
         <StatusBar translucent={true} />
-        {/* Titulo */}
+        {/* Titulo
         <View style={styles.Header}>
           <MaterialCommunityIcons
             name="brightness-percent"
@@ -31,7 +32,7 @@ export default function App() {
             color="white"
           />
         </View>
-        {/* Corpo do APP */}
+        Corpo do APP */}
         <Calculadora />
       </SafeAreaView>
     </TouchableWithoutFeedback>
