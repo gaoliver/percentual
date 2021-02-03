@@ -211,9 +211,7 @@ export default class Calculadora extends Component {
             onPress={() =>
               Alert.alert(
                 "Como usar?",
-                "Altere os valores dos campos desejados e deixe zerado apenas o que deseja calcular. Depois, toque o botão CALCULAR para ver o resultado." +
-                  "\n" +
-                  "\nPara realizar a operação novamente, toque o botão ZERAR."
+                "Preencha os campos com valores, deixando em branco apenas o valor que deseja descobrir. Em seguida, toque em CALCULAR."
               )
             }
           >
