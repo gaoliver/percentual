@@ -2,11 +2,7 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   View,
-  Keyboard,
-  SafeAreaView,
-  StatusBar,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -32,10 +28,13 @@ export default Header;
 
 const styles = StyleSheet.create({
   Header: {
+    flex: 0.4,
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-around",
-    alignItems: "center",
+    alignItems: "flex-end",
+    backgroundColor: '#000',
+    paddingBottom: 30
   },
   Title: {
     color: "#FFF",

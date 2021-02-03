@@ -3,30 +3,23 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
-  SafeAreaView,
-  StatusBar,
+  View,
 } from "react-native";
+import { StatusBar } from 'expo-status-bar'
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
 
-import Header from './src/Screens/Header'
-import Calculadora from "./src/Screens/Calculadora";
+import Header from "./src/Screens/Header";
 import Navigator from "./src/Navigator";
 
 export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView style={styles.container}>
-        <StatusBar translucent={true} />
+      <View style={{ flex: 1 }}>
+        <StatusBar style="light" />
+        <Header />
         <Navigator />
-      </SafeAreaView>
+      </View>
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center",
-  }
-});
