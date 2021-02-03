@@ -8,6 +8,18 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
+  Header: {
+    flex: 0.4,
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-around",
+    alignItems: "flex-end",
+    paddingBottom: 30,
+  },
+  Title: {
+    color: Colors.light,
+    fontSize: 36,
+  },
   Caixa: {
     alignItems: "center",
     justifyContent: "center",
