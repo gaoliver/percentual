@@ -169,7 +169,7 @@ const Crescimento = ({ navigation }) => {
             placeholderTextColor={plcHoldColor}
             style={styles.Input}
             onChangeText={(value) => {
-              setperc(Number(value));
+              setperc(value);
               setcontador(+1);
             }}
           >
