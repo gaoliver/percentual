@@ -134,6 +134,7 @@ const Crescimento = ({ navigation }) => {
               setprimeiro(Number(value));
               setcontador(+1);
             }}
+            textAlign='center'
           >
             <Text>{primeiro}</Text>
           </TextInput>
@@ -153,6 +154,7 @@ const Crescimento = ({ navigation }) => {
               setfinal(Number(value));
               setcontador(+1);
             }}
+            textAlign='center'
           >
             <Text>{final}</Text>
           </TextInput>
@@ -172,6 +174,7 @@ const Crescimento = ({ navigation }) => {
               setperc(value);
               setcontador(+1);
             }}
+            textAlign='center'
           >
             <Text>{perc}</Text>
           </TextInput>
