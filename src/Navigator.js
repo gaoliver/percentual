@@ -51,7 +51,7 @@ const TabNavigator = () => {
           }}
         />
         <Tab.Screen
-          name="Crescimento"
+          name="Margem"
           component={Crescimento}
           options={{
             tabBarIcon: (tabInfo) => {

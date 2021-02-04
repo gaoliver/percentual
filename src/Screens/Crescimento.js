@@ -13,23 +13,34 @@ import { styles } from "./styles";
 
 const Crescimento = ({ navigation }) => {
   // Back-end
+  const [primeiro, setprimeiro] = useState(undefined);
+  const [final, setfinal] = useState(undefined);
   const [perc, setperc] = useState(undefined);
-  const [num, setnum] = useState(undefined);
-  const [valor, setvalor] = useState(undefined);
   const [plcHoldColor, setplcHoldColor] = useState("#cecece");
   const [contador, setcontador] = useState(0);
   const [ModalVisible, setModalVisible] = useState(false);
 
+  // Alerta de Regras
+  const rules = () => {
+    return Alert.alert(
+      "Fora da regra",
+      "O PRIMEIRO VALOR não pode estar em branco." +
+        "\n\nPor favor, defina o PRIMEIRO VALOR e a PORCENTAGEM, para descobrir o VALOR POSTERIOR." +
+        "\n\nDefina o PRIMEIRO VALOR e o VALOR FINAL, para descobrir a MARGEM."
+    );
+  };
+
   //   Função calcular
   const calc = () => {
-    if (valor == undefined) {
-      var z = (perc * num) / 100;
-      setvalor(z.toFixed(2));
-    } else if (num == undefined) {
-      var y = (100 * valor) / perc;
-      setnum(y.toFixed(2));
+    if (primeiro == undefined) {
+      rules();
+    } else if (final == undefined) {
+      let x = (perc / 100) * primeiro;
+      let y = primeiro + x;
+      setfinal(y.toFixed(2));
     } else if (perc == undefined) {
-      var x = (100 * valor) / num;
+      let diff = final - primeiro;
+      let x = (diff * 100) / primeiro;
       setperc(x.toFixed(2));
     } else {
       setModalVisible(true);
@@ -40,30 +51,41 @@ const Crescimento = ({ navigation }) => {
     setModalVisible(false);
   }
 
-  function calcX() {
-    var x = (100 * valor) / num;
-    setperc(x.toFixed(2));
+  function calcPrimeiro() {
+    rules();
     setModalVisible(false);
   }
 
-  function calcY() {
-    var y = (100 * valor) / perc;
-    setnum(y.toFixed(2));
-    setModalVisible(false);
+  function calcFinal() {
+    if (primeiro == undefined || primeiro <= 0) {
+      rules();
+      setModalVisible(false);
+    } else {
+      let x = (perc / 100) * primeiro;
+      let y = primeiro + x;
+      setfinal(y.toFixed(2));
+      setModalVisible(false);
+    }
   }
 
-  function calcZ() {
-    var z = (perc * num) / 100;
-    setvalor(z.toFixed(2));
-    setModalVisible(false);
+  function calcPerc() {
+    if (primeiro == undefined || primeiro <= 0) {
+      rules();
+      setModalVisible(false);
+    } else {
+      let diff = final - primeiro;
+      let x = (diff / 100) * primeiro;
+      setfinal(x.toFixed(2));
+      setModalVisible(false);
+    }
   }
 
   //   Função zerar
-  function zerar() {
+  const zerar = () => {
     setperc(undefined);
-    setnum(undefined);
-    setvalor(undefined);
-  }
+    setprimeiro(undefined);
+    setfinal(undefined);
+  };
 
   // Fim do back-end
 
@@ -73,20 +95,17 @@ const Crescimento = ({ navigation }) => {
       <Modal visible={ModalVisible} animationType="slide" transparent={true}>
         <View style={styles.ModalFundo}>
           <View style={styles.Modal}>
-            <Text style={styles.ModalTitle}>Qual valor deseja descobrir?</Text>
+            <Text style={styles.ModalTitle}>Qual final deseja descobrir?</Text>
             <View style={styles.ModalButtons}>
               <View style={styles.ModalButtonsIn}>
                 <Button
-                  title="X:   o anterior"
-                  onPress={() => calcX()}
+                  title="o primeiro"
+                  onPress={() => calcPrimeiro()}
                 ></Button>
+                <Button title="o final" onPress={() => calcFinal()}></Button>
                 <Button
-                  title="Y:   o posterior"
-                  onPress={() => calcY()}
-                ></Button>
-                <Button
-                  title="Z:   a porcentagem"
-                  onPress={() => calcZ()}
+                  title="a porcentagem"
+                  onPress={() => calcPerc()}
                 ></Button>
               </View>
               <Button
@@ -100,11 +119,11 @@ const Crescimento = ({ navigation }) => {
       </Modal>
 
       <View style={styles.Caixa}>
-        {/* Primeira Linha - Valor Anterior - X */}
+        {/* Primeira Linha - Primeiro valor - X */}
         <View style={{ ...styles.Col, alignItems: "center" }}>
           {/* Input */}
           <Text style={{ ...styles.Text, fontSize: 15, fontWeight: "bold" }}>
-            Valor Anterior
+            Primeiro valor
           </Text>
           <TextInput
             placeholder={"0.00"}
@@ -112,18 +131,18 @@ const Crescimento = ({ navigation }) => {
             placeholderTextColor={plcHoldColor}
             style={styles.InputCresc}
             onChangeText={(value) => {
-              setperc(Number(value));
+              setprimeiro(Number(value));
               setcontador(+1);
             }}
           >
-            <Text>{perc}</Text>
+            <Text>{primeiro}</Text>
           </TextInput>
         </View>
 
-        {/* Segunda Linha - Valor Posterior - Y */}
+        {/* Segunda Linha - Valor final - Y */}
         <View style={{ ...styles.Col, alignItems: "center" }}>
           <Text style={{ ...styles.Text, fontSize: 15, fontWeight: "bold" }}>
-            Valor Posterior
+            Valor final
           </Text>
           <TextInput
             placeholder={"0.00"}
@@ -131,18 +150,18 @@ const Crescimento = ({ navigation }) => {
             placeholderTextColor={plcHoldColor}
             style={styles.InputCresc}
             onChangeText={(value) => {
-              setnum(Number(value));
+              setfinal(Number(value));
               setcontador(+1);
             }}
           >
-            <Text>{num}</Text>
+            <Text>{final}</Text>
           </TextInput>
         </View>
 
         {/* Terceira Linha - Porcentagem de Crescimento - Z */}
         <View style={{ ...styles.Col, alignItems: "center" }}>
           <Text style={{ ...styles.Text, fontSize: 15, fontWeight: "bold" }}>
-            Crescimento
+            Margem(%)
           </Text>
           <TextInput
             placeholder={"0%"}
@@ -150,11 +169,11 @@ const Crescimento = ({ navigation }) => {
             placeholderTextColor={plcHoldColor}
             style={styles.Input}
             onChangeText={(value) => {
-              setvalor(Number(value));
+              setperc(Number(value));
               setcontador(+1);
             }}
           >
-            <Text>{valor}</Text>
+            <Text>{perc}</Text>
           </TextInput>
         </View>
       </View>
