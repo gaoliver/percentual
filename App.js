@@ -1,58 +1,25 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
-  View,
   Keyboard,
-  SafeAreaView,
-  StatusBar,
+  View,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StatusBar } from 'expo-status-bar'
+import "react-native-gesture-handler";
+import Colors from './src/Constants/Colors'
 
-import Calculadora from "./Calculadora";
+import Header from "./src/Screens/Header";
+import Navigator from "./src/Navigator";
 
 export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView style={styles.container}>
-        <StatusBar translucent={true} />
-        {/* Titulo */}
-        <View style={styles.Header}>
-          <MaterialCommunityIcons
-            name="brightness-percent"
-            size={46}
-            color="white"
-          />
-          <Text style={styles.Title}>P e r c e n t u a l</Text>
-          <MaterialCommunityIcons
-            name="brightness-percent"
-            size={46}
-            color="white"
-          />
-        </View>
-        {/* Corpo do APP */}
-        <Calculadora />
-      </SafeAreaView>
+      <View style={{flex: 1, backgroundColor: Colors.background}}>
+        <StatusBar style="light" />
+        <Header />
+        <Navigator />
+      </View>
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  Header: {
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  Title: {
-    color: "#FFF",
-    fontSize: 40,
-  },
-});
