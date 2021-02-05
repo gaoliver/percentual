@@ -3,6 +3,7 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import Colors from "./Constants/Colors";
 
 // Screens
@@ -12,6 +13,7 @@ import Crescimento from "./Screens/Crescimento";
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+
   return (
     <NavigationContainer>
       <Tab.Navigator
