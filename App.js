@@ -5,7 +5,14 @@ import {
   Keyboard,
   View,
 } from "react-native";
-import { Tabs, Tab, TabHeading, Icon, Text, Container } from "native-base";
+import {
+  Tabs,
+  Tab,
+  TabHeading,
+  Icon,
+  Text,
+  Container,
+} from "native-base";
 import { StatusBar } from "expo-status-bar";
 import "react-native-gesture-handler";
 import Colors from "./src/Constants/Colors";
@@ -14,6 +21,8 @@ import { styles } from "./src/Screens/styles";
 import Header from "./src/Screens/Header";
 import Calculadora from "./src/Screens/Calculadora";
 import Crescimento from "./src/Screens/Crescimento";
+
+import Footer from "./src/Components/Footer"
 
 export default function App() {
   return (
@@ -47,6 +56,7 @@ export default function App() {
           <Crescimento />
         </Tab>
       </Tabs>
+      <Footer />
     </Container>
   );
 }
