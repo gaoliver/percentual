@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Text,
   View,
@@ -12,7 +12,6 @@ import {
 import { styles } from './styles'
 
 const Calculadora = ({ navigation }) => {
-  // Back-end
   const [perc, setperc] = useState(undefined);
   const [num, setnum] = useState(undefined);
   const [valor, setvalor] = useState(undefined);
@@ -65,7 +64,10 @@ const Calculadora = ({ navigation }) => {
     setvalor(undefined);
   }
 
-  // Fim do back-end
+  // Váriáveis de Ref
+  const PercentRef = useRef();
+  const NumberRef = useRef();
+  const ValueRef = useRef();
 
   return (
     <View style={styles.container}>
@@ -112,6 +114,9 @@ const Calculadora = ({ navigation }) => {
               setperc(Number(value));
               setcontador(+1);
             }}
+            ref={PercentRef}
+            onSubmitEditing={() => NumberRef.current.focus()}
+            returnKeyType="next"
           >
             <Text>{perc}</Text>
           </TextInput>
@@ -131,6 +136,9 @@ const Calculadora = ({ navigation }) => {
               setnum(Number(value));
               setcontador(+1);
             }}
+            ref={NumberRef}
+            onSubmitEditing={() => ValueRef.current.focus()}
+            returnKeyType="next"
           >
             <Text>{num}</Text>
           </TextInput>
@@ -148,6 +156,8 @@ const Calculadora = ({ navigation }) => {
               setvalor(Number(value));
               setcontador(+1);
             }}
+            ref={ValueRef}
+            returnKeyType="done"
           >
             <Text>{valor}</Text>
           </TextInput>

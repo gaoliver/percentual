@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Text,
   View,
@@ -12,7 +12,6 @@ import {
 import { styles } from "./styles";
 
 const Crescimento = ({ navigation }) => {
-  // Back-end
   const [primeiro, setprimeiro] = useState(undefined);
   const [final, setfinal] = useState(undefined);
   const [perc, setperc] = useState(undefined);
@@ -87,7 +86,10 @@ const Crescimento = ({ navigation }) => {
     setfinal(undefined);
   };
 
-  // Fim do back-end
+  // References
+  const PrimeiroRef = useRef();
+  const SegundoRef = useRef();
+  const PercentRef = useRef();
 
   return (
     <View style={styles.container}>
@@ -135,6 +137,9 @@ const Crescimento = ({ navigation }) => {
               setcontador(+1);
             }}
             textAlign='center'
+            ref={PrimeiroRef}
+            onSubmitEditing={() => SegundoRef.current.focus()}
+            returnKeyType="next"
           >
             <Text>{primeiro}</Text>
           </TextInput>
@@ -155,6 +160,9 @@ const Crescimento = ({ navigation }) => {
               setcontador(+1);
             }}
             textAlign='center'
+            ref={SegundoRef}
+            onSubmitEditing={() => PercentRef.current.focus()}
+            returnKeyType="next"
           >
             <Text>{final}</Text>
           </TextInput>
@@ -175,6 +183,7 @@ const Crescimento = ({ navigation }) => {
               setcontador(+1);
             }}
             textAlign='center'
+            ref={PercentRef}
           >
             <Text>{perc}</Text>
           </TextInput>
