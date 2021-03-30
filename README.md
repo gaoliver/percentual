@@ -10,4 +10,4 @@ Nesta nova versão, eu deixei o app mais dinâmico, com abas animadas que segura
 
 Por favor, deixe sua sugestão para futuras melhorias.
 
-Download (APK): https://drive.google.com/file/d/1tX2Zyk6a17xTdVJr1qcf4F28VmMOUcu1/view?usp=sharing
+> Download (APK): https://drive.google.com/file/d/1tX2Zyk6a17xTdVJr1qcf4F28VmMOUcu1/view?usp=sharing
