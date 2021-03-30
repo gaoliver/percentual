@@ -101,4 +101,7 @@ export const styles = StyleSheet.create({
     height: 130,
     justifyContent: "space-between",
   },
+  tabHeading: {
+    backgroundColor: Colors.grey,
+  }
 });
