@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   Header: {
-    flex: 0.4,
+    flex: 0.2,
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-around",
@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.light,
     height: 300,
     width: 300,
-    marginTop: 20,
     borderRadius: 150,
   },
   Row: {
